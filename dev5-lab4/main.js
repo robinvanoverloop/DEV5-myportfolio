@@ -12,6 +12,9 @@ const scene = new THREE.Scene();
 
       // orbit controls
       const controls = new OrbitControls(camera, renderer.domElement);
+      // orbit max zoom limit
+      controls.maxDistance = 100;
+      controls.minDistance = 10;
 
        // ambient light
        const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
