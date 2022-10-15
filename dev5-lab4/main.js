@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const scene = new THREE.Scene();
 			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
+      const textureLoader = new THREE.TextureLoader();
 			const renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
@@ -21,28 +21,24 @@ const scene = new THREE.Scene();
       directionalLight.position.set( 30, 20, 10);
       scene.add( directionalLight );
 
-      // add light in house 
-      const light2 = new THREE.PointLight(0xff0000, 1, 100);
-      light2.position.set(0, 0, 0);
-      scene.add(light2);
-
       // directional light helper
       const directionalLightHelper = new THREE.DirectionalLightHelper( directionalLight, 2, );
       scene.add( directionalLightHelper );
 
       // house (cube)
 			const geometry = new THREE.BoxGeometry( 10, 10, 10 );
-			const material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-			const cube = new THREE.Mesh( geometry, material );
+			const cubeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+			const cube = new THREE.Mesh( geometry, cubeMaterial );
       cube.position.set(0, 0, 0);
 			scene.add( cube );
 
       // load wall texture on cube
-      const loader = new THREE.TextureLoader();
-      loader.load('/assets/textures/wall.png', (texture) => {
-        const material = new THREE.MeshBasicMaterial({ map: texture });
-        cube.material = material;
-      });
+      const wallTexture = textureLoader.load('/assets/textures/wall.png');
+      cubeMaterial.map = wallTexture;
+      cubeMaterial.side = THREE.BackSide;
+      cube.position.set( 0, 0, 0 );
+      scene.add( cube );
+
 
       // roof (cone)
       const pyramidGeometry = new THREE.ConeGeometry( 9, 5, 4 );
@@ -60,9 +56,8 @@ const scene = new THREE.Scene();
       scene.add(sphere);
 
       // sky texture
-      const textureLoader = new THREE.TextureLoader(); 
-      const galaxyTexture = textureLoader.load('/assets/textures/sky_noclouds.jpg');
-      sphereMaterial.map = galaxyTexture;
+      const skyTexture = textureLoader.load('/assets/textures/sky_noclouds.jpg');
+      sphereMaterial.map = skyTexture;
       sphereMaterial.side = THREE.BackSide;
       sphere.position.set( 0, 0, 0 );
       scene.add( sphere );
