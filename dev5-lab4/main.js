@@ -85,13 +85,57 @@ const scene = new THREE.Scene();
       picture.rotation.y = Math.PI / 1;
       scene.add( picture );
 
-      // import chicken gltf
+      // import bird gltf
+      let bird;
+      const addbird = (x, y, z) => {
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load('/assets/models/chicken/scene.gltf', (gltf) => {
-        gltf.scene.scale.set( 5, 5, 5);
-        gltf.scene.position.set(0, -5, 0);
+      gltfLoader.load('/assets/models/bird/scene.gltf', (gltf) => {
+        bird = gltf.scene;
+        gltf.scene.scale.set( 25, 25, 25);
+        gltf.scene.position.set(0, 0, 0);
+        bird.position.set( x, y, z );
+        scene.add(gltf.scene);
+        scene.add (bird);
+      });
+      }
+
+
+      // add bird to random places
+      for (let i = 0; i < 10; i++) {
+        let sign = Math.random() < 0.5 ? -1 : 1;
+        let x = Math.random() * 66 * sign;
+        sign = Math.random() < 0.5 ? -1 : 1;
+        let y = Math.random() * 66 * sign;
+        sign = Math.random() < 0.5 ? -1 : 1;
+        let z = Math.random() * 66 * sign;
+        addbird(x, y, z);
+      }
+
+      // import clouds gltf
+      let clouds;
+      const addclouds = (x, y, z) => {
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.load('/assets/models/clouds/scene.gltf', (gltf) => {
+        clouds = gltf.scene;
+        gltf.scene.scale.set( 0.03, 0.03, 0.03);
+        gltf.scene.position.set(0, 0, 0);
+        clouds.position.set( x, y, z );
         scene.add(gltf.scene);
       });
+    }
+
+      // add clouds to random places
+      for (let i = 0; i < 10; i++) {
+        let sign = Math.random() < 0.5 ? -1 : 1;
+        let x = Math.random() * 66 * sign;
+        sign = Math.random() < 0.5 ? -1 : 1;
+        let y = Math.random() * 66 * sign;
+        sign = Math.random() < 0.5 ? -1 : 1;
+        let z = Math.random() * 66 * sign;
+        addclouds(x, y, z);
+      }
+      
+
 
 
 			camera.position.z = 35;
@@ -100,7 +144,16 @@ const scene = new THREE.Scene();
 			function animate() {
 				requestAnimationFrame( animate );
 
-				
+				// chicken.rotation.x += 0.01;
+				// chicken.rotation.y += 0.01;
+
+        // camera.position.z += 0.01;
+        camera.position.x += 0.05;
+        camera.position.y += 0.05;
+
+        // look at donut
+        camera.lookAt(cube.position);
+
 				renderer.render( scene, camera );
 			};
 
