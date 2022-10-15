@@ -9,10 +9,10 @@ const scene = new THREE.Scene();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 
-      // add orbit controls
+      // orbit controls
       const controls = new OrbitControls(camera, renderer.domElement);
 
-       // add ambient light
+       // ambient light
        const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
        scene.add( ambientLight );
 
@@ -32,13 +32,12 @@ const scene = new THREE.Scene();
       cube.position.set(0, 0, 0);
 			scene.add( cube );
 
-      // load wall texture on cube
+      // wall texture
       const wallTexture = textureLoader.load('/assets/textures/wall.png');
       cubeMaterial.map = wallTexture;
       cubeMaterial.side = THREE.BackSide;
       cube.position.set( 0, 0, 0 );
       scene.add( cube );
-
 
       // roof (cone)
       const pyramidGeometry = new THREE.ConeGeometry( 9, 5, 4 );
@@ -69,6 +68,21 @@ const scene = new THREE.Scene();
       plane.position.set(0, -5, 0);
       plane.rotation.x = Math.PI / 2;
       scene.add( plane );
+
+      // add plane
+      const pictureGeometry = new THREE.PlaneGeometry( 5, 5, 32, 32 );
+      const pictureMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
+      const picture = new THREE.Mesh( pictureGeometry, pictureMaterial );
+      picture.position.set(5, 5, 0);
+      scene.add( picture );
+
+      // picuture texture
+      const pictureTexture = textureLoader.load('/assets/textures/picture.jpeg');
+      pictureMaterial.map = pictureTexture;
+      picture.position.set( 0, 0, -4.9 );
+      picture.rotation.x = Math.PI / 200;
+      picture.rotation.y = Math.PI / 1;
+      scene.add( picture );
 
 			camera.position.z = 35;
 
