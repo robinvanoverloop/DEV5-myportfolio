@@ -135,7 +135,16 @@ const scene = new THREE.Scene();
         addclouds(x, y, z);
       }
       
-
+      // add chicken gltf
+      let chicken;
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.load('/assets/models/chicken/scene.gltf', (gltf) => {
+        chicken = gltf.scene;
+        gltf.scene.scale.set( 5, 5, 5);
+        gltf.scene.position.set(0, 0, 0);
+        gltf.scene.position.set(0, -5, 0);
+        scene.add(gltf.scene);
+      });
 
 
 			camera.position.z = 35;
@@ -143,16 +152,15 @@ const scene = new THREE.Scene();
       // animate function
 			function animate() {
 				requestAnimationFrame( animate );
+        // rotate the cube
 
-				// chicken.rotation.x += 0.01;
-				// chicken.rotation.y += 0.01;
+				chicken.rotation.y += 0.01;
 
-        // camera.position.z += 0.01;
         camera.position.x += 0.05;
         camera.position.y += 0.05;
 
         // look at donut
-        camera.lookAt(cube.position);
+        camera.lookAt(chicken.position);
 
 				renderer.render( scene, camera );
 			};
