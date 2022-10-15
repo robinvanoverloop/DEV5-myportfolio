@@ -12,28 +12,35 @@ const scene = new THREE.Scene();
       // add orbit controls
       const controls = new OrbitControls(camera, renderer.domElement);
 
-      // add grid helper
-      const gridHelper = new THREE.GridHelper(200, 50);
-      scene.add(gridHelper);
-
        // add ambient light
        const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
        scene.add( ambientLight );
 
       // add directional light
-      const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-      directionalLight.position.set( 12, 12, 4);
+      const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+      directionalLight.position.set( 20, 20, 10);
       scene.add( directionalLight );
 
       // add directional light helper
       const directionalLightHelper = new THREE.DirectionalLightHelper( directionalLight, 2 );
       scene.add( directionalLightHelper );
 
-      // house
-			const geometry = new THREE.BoxGeometry( 3, 3, 3 );
+      // house (cube)
+			const geometry = new THREE.BoxGeometry( 10, 10, 10 );
 			const material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
 			const cube = new THREE.Mesh( geometry, material );
+      cube.position.set(0, 0, 0);
 			scene.add( cube );
+
+      // roof (cone)
+      const pyramidGeometry = new THREE.ConeGeometry( 9, 5, 4 );
+      pyramidGeometry.rotateY(Math.PI / 4);
+      const pyramidMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+      const pyramid = new THREE.Mesh( pyramidGeometry, pyramidMaterial );
+      pyramid.position.set(0, 7, 0);
+      scene.add(pyramid);
+
+      
 
 			camera.position.z = 5;
 
