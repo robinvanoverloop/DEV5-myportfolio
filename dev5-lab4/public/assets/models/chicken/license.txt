@@ -1,0 +1,11 @@
+Model Information:
+* title:	chicken
+* source:	https://sketchfab.com/3d-models/chicken-0098586123fc435f86c7f5cb3d3b8a79
+* author:	Maf'j Alvarez (https://sketchfab.com/blujay)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "chicken" (https://sketchfab.com/3d-models/chicken-0098586123fc435f86c7f5cb3d3b8a79) by Maf'j Alvarez (https://sketchfab.com/blujay) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

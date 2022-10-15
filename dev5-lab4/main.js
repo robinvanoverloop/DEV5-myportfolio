@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -83,6 +84,15 @@ const scene = new THREE.Scene();
       picture.rotation.x = Math.PI / 200;
       picture.rotation.y = Math.PI / 1;
       scene.add( picture );
+
+      // import chicken gltf
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.load('/assets/models/chicken/scene.gltf', (gltf) => {
+        gltf.scene.scale.set( 5, 5, 5);
+        gltf.scene.position.set(0, -5, 0);
+        scene.add(gltf.scene);
+      });
+
 
 			camera.position.z = 35;
 
