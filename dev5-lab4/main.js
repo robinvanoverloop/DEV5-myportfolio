@@ -21,8 +21,13 @@ const scene = new THREE.Scene();
       directionalLight.position.set( 30, 20, 10);
       scene.add( directionalLight );
 
+      // add light in house 
+      const light2 = new THREE.PointLight(0xff0000, 1, 100);
+      light2.position.set(0, 0, 0);
+      scene.add(light2);
+
       // directional light helper
-      const directionalLightHelper = new THREE.DirectionalLightHelper( directionalLight, 2 );
+      const directionalLightHelper = new THREE.DirectionalLightHelper( directionalLight, 2, );
       scene.add( directionalLightHelper );
 
       // house (cube)
@@ -31,6 +36,13 @@ const scene = new THREE.Scene();
 			const cube = new THREE.Mesh( geometry, material );
       cube.position.set(0, 0, 0);
 			scene.add( cube );
+
+      // load wall texture on cube
+      const loader = new THREE.TextureLoader();
+      loader.load('/assets/textures/wall.png', (texture) => {
+        const material = new THREE.MeshBasicMaterial({ map: texture });
+        cube.material = material;
+      });
 
       // roof (cone)
       const pyramidGeometry = new THREE.ConeGeometry( 9, 5, 4 );
@@ -63,7 +75,7 @@ const scene = new THREE.Scene();
       plane.rotation.x = Math.PI / 2;
       scene.add( plane );
 
-			camera.position.z = 105;
+			camera.position.z = 35;
 
       // animate function
 			function animate() {
