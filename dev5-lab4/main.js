@@ -40,7 +40,20 @@ const scene = new THREE.Scene();
       pyramid.position.set(0, 7, 0);
       scene.add(pyramid);
 
-      
+      // add sphere
+      const sphereGeometry = new THREE.SphereGeometry( 100, 32, 32 );
+      const sphereMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+      const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+      sphere.position.set(0, 0, 0);
+      scene.add(sphere);
+
+      // add sky texture to sphere
+      const textureLoader = new THREE.TextureLoader(); 
+      const galaxyTexture = textureLoader.load('/assets/textures/sky_noclouds.jpg');
+      sphereMaterial.map = galaxyTexture;
+      sphereMaterial.side = THREE.BackSide;
+      sphere.position.set( 0, 0, 0 );
+      scene.add( sphere );
 
 			camera.position.z = 5;
 
